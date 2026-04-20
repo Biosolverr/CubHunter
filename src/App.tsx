@@ -62,7 +62,11 @@ export default function App() {
   const [progress, setProgress] = useState(0);
 
   const scan = async () => {
-    if (!code.trim()) return;
+    console.log("Scan initiated...");
+    if (!code.trim()) {
+      console.log("Abort: Empty code");
+      return;
+    }
 
     setIsScanning(true);
     setError(null);
@@ -74,8 +78,18 @@ export default function App() {
     }, 200);
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+      console.log("Attempting to load configuration...");
+      const apiKey = typeof process !== 'undefined' && process.env ? process.env.GEMINI_API_KEY : (import.meta as any).env.VITE_GEMINI_API_KEY;
       
+      if (!apiKey) {
+        console.error("Critical: API Key is undefined");
+        throw new Error("GEMINI_API_KEY is missing from environment. Please set it in the Secrets panel.");
+      }
+
+      console.log("Config loaded. Initializing Gemini SDK...");
+      const ai = new GoogleGenAI({ apiKey });
+      
+      console.log("Scanning contract code...");
       const response = await ai.models.generateContent({
         model: "gemini-3.1-pro-preview",
         contents: code,
@@ -169,10 +183,32 @@ export default function App() {
           </div>
           
           <div className="flex items-center gap-6 text-sm font-medium text-slate-400">
-            <button className="hover:text-white transition-colors cursor-pointer hidden md:block">Real-time Feed</button>
-            <button className="hover:text-white transition-colors cursor-pointer hidden md:block">Audit History</button>
+            <button 
+              onClick={() => {
+                console.log("Real-time feed clicked");
+                alert("Real-time detection feed is being synchronized...");
+              }}
+              className="hover:text-white transition-colors cursor-pointer hidden md:block"
+            >
+              Real-time Feed
+            </button>
+            <button 
+              onClick={() => {
+                console.log("Audit history clicked");
+                alert("Retrieving your past security audits...");
+              }}
+              className="hover:text-white transition-colors cursor-pointer hidden md:block"
+            >
+              Audit History
+            </button>
             <div className="h-4 w-px bg-slate-800" />
-            <button className="flex items-center gap-2 px-4 py-2 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 rounded-full border border-blue-500/20 transition-all active:scale-95">
+            <button 
+              onClick={() => {
+                console.log("Connect Wallet clicked");
+                alert("Wallet connection sequence initiated...");
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 rounded-full border border-blue-500/20 transition-all active:scale-95 cursor-pointer"
+            >
               <Zap className="w-4 h-4 fill-current" />
               <span>Connect Wallet</span>
             </button>
@@ -225,18 +261,24 @@ export default function App() {
                   spellCheck={false}
                 />
                 
-                <div className="absolute bottom-6 right-6 flex gap-3">
+                <div className="absolute bottom-6 right-6 flex gap-3 z-30">
                   <button 
-                    onClick={() => setCode("")}
-                    className="p-3 bg-slate-950/80 hover:bg-slate-900 border border-slate-800 rounded-2xl text-slate-400 hover:text-white transition-all shadow-xl"
+                    onClick={() => {
+                      console.log("Clear button clicked");
+                      setCode("");
+                    }}
+                    className="p-3 bg-slate-950/80 hover:bg-slate-900 border border-slate-800 rounded-2xl text-slate-400 hover:text-white transition-all shadow-xl active:scale-95"
                     title="Clear"
                   >
                     <RotateCcw className="w-5 h-5" />
                   </button>
                   <button 
-                    onClick={scan}
+                    onClick={() => {
+                      console.log("Run Audit clicked");
+                      scan();
+                    }}
                     disabled={isScanning}
-                    className="flex items-center gap-3 px-8 py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-blue-600/20 group overflow-hidden relative"
+                    className="flex items-center gap-3 px-8 py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 text-white rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-xl shadow-blue-600/20 group overflow-hidden relative active:scale-95 cursor-pointer"
                   >
                     {isScanning ? (
                       <>
