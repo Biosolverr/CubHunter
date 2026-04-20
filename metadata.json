@@ -1,0 +1,6 @@
+{
+  "name": "SecureVault Hardhat Repository",
+  "description": "A production-grade Hardhat project featuring the SecureVault UUPS upgradeable contract with advanced security mechanisms including quarantine, EIP-712 recovery, and flash loan protection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

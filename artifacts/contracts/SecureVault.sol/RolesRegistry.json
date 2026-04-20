@@ -1,0 +1,99 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "RolesRegistry",
+  "sourceName": "contracts/SecureVault.sol",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "COUNTERPARTY_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "GUARDIAN_ROLE",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561000f575f80fd5b506101598061001d5f395ff3fe608060405234801561000f575f80fd5b506004361061003f575f3560e01c806324ea54f41461004357806391d148541461007d578063a54efea5146100c3575b5f80fd5b61006a7f55435dd261a4b9b3364963f7738a7a662ad9c84396d64be3365284bb7f0a504181565b6040519081526020015b60405180910390f35b6100b361008b3660046100ea565b5f918252602082815260408084206001600160a01b0393909316845291905290205460ff1690565b6040519015158152602001610074565b61006a7f8395ada023be9e2c3c970f93fc5f0fa42f5103355a7e14885e0e3f79beea3fe481565b5f80604083850312156100fb575f80fd5b8235915060208301356001600160a01b0381168114610118575f80fd5b80915050925092905056fea2646970667358221220980e38354b00ffdf347f413331dba2fc3c9b3d862cb9e6150437fc5a3b64b63664736f6c63430008180033",
+  "deployedBytecode": "0x608060405234801561000f575f80fd5b506004361061003f575f3560e01c806324ea54f41461004357806391d148541461007d578063a54efea5146100c3575b5f80fd5b61006a7f55435dd261a4b9b3364963f7738a7a662ad9c84396d64be3365284bb7f0a504181565b6040519081526020015b60405180910390f35b6100b361008b3660046100ea565b5f918252602082815260408084206001600160a01b0393909316845291905290205460ff1690565b6040519015158152602001610074565b61006a7f8395ada023be9e2c3c970f93fc5f0fa42f5103355a7e14885e0e3f79beea3fe481565b5f80604083850312156100fb575f80fd5b8235915060208301356001600160a01b0381168114610118575f80fd5b80915050925092905056fea2646970667358221220980e38354b00ffdf347f413331dba2fc3c9b3d862cb9e6150437fc5a3b64b63664736f6c63430008180033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
